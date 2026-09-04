@@ -5,14 +5,15 @@ echo ====================================================
 echo            Starting Fluent Bit (Windows)...
 echo ====================================================
 
-rem All Windows configuration files are next to this script.
-set "CONFIG_DIR=%~dp0"
-set "CONFIG_FILE=%CONFIG_DIR%fluent-bit.conf"
-
-rem Hard-coded Fluent Bit installation root for this machine.
+rem Fluent Bit installation root. Update this path if installed elsewhere.
 set "FB_INSTALL_HOME=C:\Users\ironp\Desktop\fluent-bit"
 echo [INFO] Using FB_INSTALL_HOME: %FB_INSTALL_HOME%
 set "FB_BIN=%FB_INSTALL_HOME%\bin\fluent-bit.exe"
+
+rem All configuration files are in the installation's conf directory.
+set "CONFIG_DIR=%FB_INSTALL_HOME%\conf"
+set "CONFIG_FILE=%CONFIG_DIR%\windows-server-2016-2019-2022\fluent-bit.conf"
+echo [INFO] Using CONFIG_FILE: %CONFIG_FILE%
 
 if not exist "%FB_BIN%" (
     echo [ERROR] Fluent Bit executable not found: %FB_BIN%
