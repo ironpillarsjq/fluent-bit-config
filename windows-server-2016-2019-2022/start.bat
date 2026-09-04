@@ -10,9 +10,9 @@ set "FB_INSTALL_HOME=C:\Users\ironp\Desktop\fluent-bit"
 echo [INFO] Using FB_INSTALL_HOME: %FB_INSTALL_HOME%
 set "FB_BIN=%FB_INSTALL_HOME%\bin\fluent-bit.exe"
 
-rem All configuration files are in the installation's conf directory.
-set "CONFIG_DIR=%FB_INSTALL_HOME%\conf"
-set "CONFIG_FILE=%CONFIG_DIR%\windows-server-2016-2019-2022\fluent-bit.conf"
+rem Use the directory containing this script and all configuration files.
+set "CONFIG_DIR=%~dp0"
+set "CONFIG_FILE=%CONFIG_DIR%fluent-bit.conf"
 echo [INFO] Using CONFIG_FILE: %CONFIG_FILE%
 
 if not exist "%FB_BIN%" (
@@ -35,14 +35,14 @@ taskkill /f /im fluent-bit.exe >nul 2>&1
 echo [SUCCESS] Preparation complete. Starting Fluent Bit...
 echo ----------------------------------------------------
 
-pushd "%CONFIG_DIR%"
+pushd "%CONFIG_DIR%" || exit /b 1
 "%FB_BIN%" -c "%CONFIG_FILE%"
 set "FB_EXIT_CODE=%ERRORLEVEL%"
 popd
 goto finish
 
 :check_config
-pushd "%CONFIG_DIR%"
+pushd "%CONFIG_DIR%" || exit /b 1
 "%FB_BIN%" --dry-run -c "%CONFIG_FILE%"
 set "FB_EXIT_CODE=%ERRORLEVEL%"
 popd
