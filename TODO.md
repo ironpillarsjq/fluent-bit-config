@@ -1,0 +1,2 @@
+- [ ] 验证windows的fluentbit正常运行
+- [ ] fluentbit部署到windows服务器
