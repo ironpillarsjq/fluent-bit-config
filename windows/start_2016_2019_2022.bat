@@ -15,7 +15,7 @@ set "FB_INSTALL_HOME=%~dp0..\.."
 goto home_selected
 
 :set_2008_home
-set "FB_INSTALL_HOME=%~dp0..\..\..\fluent-bit"
+set "FB_INSTALL_HOME=%~dp0..\.."
 
 :home_selected
 echo [INFO] Using FB_INSTALL_HOME: %FB_INSTALL_HOME%
